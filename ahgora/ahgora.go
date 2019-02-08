@@ -29,12 +29,12 @@ type Config struct {
 
 //PunchResponse - response from Ahgora
 type PunchResponse struct {
-	Day     string
+	Day     string   `json:"day"`
 	Name    string   `json:"nome"`
 	Punches []string `json:"batidas_dia"`
-	Reason  string
-	Result  bool
-	Time    string
+	Reason  string   `json:"reason"`
+	Result  bool     `json:"result"`
+	Time    string   `json:"time"`
 }
 
 type punchRequest struct {
