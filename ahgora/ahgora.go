@@ -6,8 +6,6 @@ import (
 	"errors"
 	"net/http"
 	"time"
-
-	"github.com/apex/log"
 )
 
 const (
@@ -23,9 +21,10 @@ type Client struct {
 
 //Config - client config
 type Config struct {
-	Account  string
-	Identity string
-	Password string
+	AhgoraURL string
+	Account   string
+	Identity  string
+	Password  string
 }
 
 //PunchResponse - response from Ahgora
@@ -88,9 +87,7 @@ func (client *Client) PunchPoint() (*PunchResponse, error) {
 		return nil, err
 	}
 
-	log.Info(string(data))
-
-	req, err := http.NewRequest("POST", "https://www.ahgora.com.br/batidaonline/verifyIdentification", bytes.NewBuffer(data))
+	req, err := http.NewRequest("POST", cfg.AhgoraURL+"/batidaonline/verifyIdentification", bytes.NewBuffer(data))
 	if err != nil {
 		return nil, err
 	}

@@ -7,9 +7,11 @@ import (
 
 // Config of the app
 type Config struct {
-	Account  string `env:"ACCOUNT"`
-	Password string `env:"PASSWORD"`
-	Identity string `env:"IDENTITY"`
+	Account                string `env:"ACCOUNT"`
+	Password               string `env:"PASSWORD"`
+	Identity               string `env:"IDENTITY"`
+	AhgoraURL              string `env:"AHGORA_URL" envDefault:"https://www.ahgora.com.br"`
+	AhgoraMockServerEnable bool   `env:"AHGORA_MOCK_SERVER_ENABLE" envDefault:"false"`
 }
 
 // MustGet returns the config
