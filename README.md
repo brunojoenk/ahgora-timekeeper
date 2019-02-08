@@ -12,7 +12,7 @@ Serviço de apontamento de horas no [Ahgora](https://www.ahgora.com.br/).
 - Randomização de apontamento de hora dentro de períodos customizados. Ex: entre 8:00h e 8:15h, entre 11:10h e 12:05h e etc. 
 - Envio semanal de relatório de pontos batidos por email
 
-## Team
+## Contributors
 | [@rogerfernandes][rogerfernandes] |
 | :-------------------------------: |
 |       ![][p_rogerfernandes]       |
