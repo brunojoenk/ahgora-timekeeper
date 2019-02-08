@@ -11,3 +11,12 @@ Serviço de apontamento de horas no [Ahgora](https://www.ahgora.com.br/).
 - Configuração de exceções para não apontar horas em dias de folga e/ou feriados
 - Randomização de apontamento de hora dentro de períodos customizados. Ex: entre 8:00h e 8:15h, entre 11:10h e 12:05h e etc. 
 - Envio semanal de relatório de pontos batidos por email
+
+## Team
+| [@rogerfernandes][rogerfernandes] |
+| :-------------------------------: |
+|       ![][p_rogerfernandes]       |
+|         Software Engineer         |
+
+[rogerfernandes]: http://github.com/rogerfernandes
+[p_rogerfernandes]: https://avatars0.githubusercontent.com/u/4138825?v=4&s=100
