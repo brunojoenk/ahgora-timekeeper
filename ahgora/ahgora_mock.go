@@ -9,8 +9,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-//StartServerMock - Is a server mock to local tests
-func StartServerMock() {
+//StartMockServer - Is a mock server to local tests
+func StartMockServer() {
 	router := mux.NewRouter()
 	ahgoraRouter := router.PathPrefix("/batidaonline").Subrouter()
 	ahgoraRouter.Path("/status").Methods(http.MethodGet).HandlerFunc(status)

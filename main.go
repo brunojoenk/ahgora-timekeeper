@@ -16,7 +16,7 @@ func main() {
 	cfg := config.MustGet()
 
 	if cfg.AhgoraMockServerEnable {
-		go ahgora.StartServerMock()
+		go ahgora.StartMockServer()
 		cfg.AhgoraURL = "http://localhost:8081"
 	}
 
