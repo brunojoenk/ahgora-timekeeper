@@ -1,6 +1,7 @@
 package ahgora
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/url"
@@ -8,36 +9,52 @@ import (
 	"time"
 )
 
-const false = "false"
-const longitude = "-48.8749733"
-const latitude = "-26.2374825"
-const accuracy = "2894"
-const formatPattern = "20060102150405"
-const provider = "network/wifi"
+/*RESPONSE
+{
+    "result": true,
+    "time": "1210",
+    "day": "2019-02-08",
+    "batidas_dia": [
+        "0816",
+        "1210"
+    ],
+    "nome": "ROGER FERNANDES",
+    "employee": {
+        "_id": "5bd05fc65b681ba7dbd65f0d"
+    },
+    "only_location": false,
+    "photo_on_punch": false,
+    "activity_on_punch": false,
+    "justification_permissions": {
+        "read_write_attach": true,
+        "add_absence": true,
+        "add_punch": true
+    },
+    "face_id_on_punch": false
+}
+*/
 
-//const origin = "chr"
-const origin = "pw2"
-
-// Client - client Ahgora
+// Client - Ahgora client
 type Client struct {
 	http.Client
 	Config
 }
 
-//Config - config
+//Config - client config
 type Config struct {
-	Identity string
 	Account  string
+	Identity string
 	Password string
 }
 
-//Apontamento - tipo apontamento
-type Apontamento struct {
-	Identity string
-	Account  string
-	Password string
-	//TimestampLoc time.Time
-	//Timestamp    time.Time
+//PunchResponse - response from Ahgora
+type PunchResponse struct {
+	Day     string
+	Name    string   `json:"nome"`
+	Punches []string `json:"batidas_dia"`
+	Reason  string
+	Result  bool
+	Time    string
 }
 
 type transport struct {
@@ -45,19 +62,11 @@ type transport struct {
 }
 
 func (t *transport) RoundTrip(r *http.Request) (*http.Response, error) {
-	//r.Header.Add("Pragma", "no-cache")
-	//r.Header.Add("Origin", "chrome-extension://cicgopfednohhlikjdnnkfgikdplefcp")
-	//r.Header.Add("Accept-Encoding", "gzip, deflate, br")
-	//r.Header.Add("Accept-Language", "pt-BR,pt;q=0.9,en;q=0.8,es;q=0.7")
-	//r.Header.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36")
-	r.Header.Add("Content-Type", "application/json")
-	//r.Header.Add("Accept", "application/json, text/plain")
-	//r.Header.Add("Cookie", "PHPSESSID=q5f8se7c4gp17mrt57qun318d4; qwert-external=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoiNWJkMDVmYzY1YjY4MWJhN2RiZDY1ZjBkIiwibGFzdENvbXBhbnkiOiJhNTg0NzgwIiwiZXh0Ijp0cnVlfSwiZXhwIjoxNTQ5NjQzNTczfQ.oRHVL-sA8Hcf8CtnSpkllcziUWiLQpK94D7zgKsOSLlvjWJ_zAaZDBfqWAZeZnxDRHojMbOSkcWSic4rjG_M9dYSPa4UQjuYSKO_W8E1-YTLQCe28KCu66VcVWLLpNW1_SfFU4IqoKX7RuNVJxh4sgDKRynErquFgyWIXUSBLPiENtwSRVAdUlc8yiDDCqACqUVYatP92OuxRykOgfjxHnUH43lhX8PXGl0eBfP-38zN-wgTQYuFnixqYoAW0e-LCHUYj4Ws2iESEO9bqNHzo07-RnjLm9yEXNqmMG6RxmLwiWBpd1riyJCZRv5RnlSDvOqumUkVhqz0r6R_OQ3CPg")
-	//r.Header.Add("Connection", "keep-alive")
+	r.Header.Add("Content-Type", "application/json;charset=UTF-8")
 	return http.DefaultTransport.RoundTrip(r)
 }
 
-// New client
+// New - new client
 func New(cfg Config) (*Client, error) {
 	return &Client{
 		http.Client{
@@ -70,33 +79,36 @@ func New(cfg Config) (*Client, error) {
 	}, nil
 }
 
-//BaterPonto - método para bater ponto
-func (client *Client) BaterPonto(apontamento Apontamento) error {
+//PunchPoint - method to punch point
+func (client *Client) PunchPoint() (*PunchResponse, error) {
 	cfg := client.Config
 
 	values := url.Values{
-		"identity": {cfg.Identity},
 		"account":  {cfg.Account},
+		"identity": {cfg.Identity},
 		"password": {cfg.Password},
 		//"logon":         {false},
-		//"longitude":     {longitude},
-		//"latitude":      {latitude},
-		//"accuracy":      {accuracy},
-		//"timestamp_loc": {apontamento.TimestampLoc.Format(formatPattern)},
 		//"provider":      {provider},
 		//"offline":       {false},
-		//"timestamp":     {apontamento.Timestamp.Format(formatPattern)},
-		"origin": {origin},
+		//"origin": {origin},
 	}
 
 	req, err := http.NewRequest("POST", "https://www.ahgora.com.br/batidaonline/verifyIdentification", strings.NewReader(values.Encode()))
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	_, err = doRequest(req, client)
+	res, err := doRequest(req, client)
+	if err != nil {
+		return nil, err
+	}
 
-	return err
+	var response *PunchResponse
+	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
+		return nil, err
+	}
+
+	return response, nil
 }
 
 func doRequest(req *http.Request, client *Client) (*http.Response, error) {

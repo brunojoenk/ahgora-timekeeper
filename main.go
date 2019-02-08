@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/apex/log"
 	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
 	"github.com/rogerfernandes/ahgora-timekeeper/config"
@@ -20,16 +22,22 @@ func main() {
 		return
 	}
 
-	apontamento := ahgora.Apontamento{
-		//Account:  "51eec6356c615d3edf39d497c137d75b",
-		//Identity: "454",
-		//Password: "454",
-		//Timestamp:    time.Now(),
-		//TimestampLoc: time.Now(),
-	}
-
-	err = ahgoraClient.BaterPonto(apontamento)
+	response, err := ahgoraClient.PunchPoint()
 	if err != nil {
 		log.WithError(err).Error("Erro ao Bater Ponto")
 	}
+	if !response.Result {
+		log.Error("Erro ao bater ponto, motivo: " + response.Reason)
+	} else {
+		log.Info(printResponse(response))
+	}
+}
+
+func printResponse(r *ahgora.PunchResponse) string {
+	out, err := json.Marshal(r)
+	if err != nil {
+		panic(err)
+	}
+
+	return string(out)
 }
