@@ -1,38 +1,19 @@
 package ahgora
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"net/http"
-	"net/url"
-	"strings"
 	"time"
+
+	"github.com/apex/log"
 )
 
-/*RESPONSE
-{
-    "result": true,
-    "time": "1210",
-    "day": "2019-02-08",
-    "batidas_dia": [
-        "0816",
-        "1210"
-    ],
-    "nome": "ROGER FERNANDES",
-    "employee": {
-        "_id": "5bd05fc65b681ba7dbd65f0d"
-    },
-    "only_location": false,
-    "photo_on_punch": false,
-    "activity_on_punch": false,
-    "justification_permissions": {
-        "read_write_attach": true,
-        "add_absence": true,
-        "add_punch": true
-    },
-    "face_id_on_punch": false
-}
-*/
+const (
+	requestOrigin   = "chr"
+	requestProvider = "network/wifi"
+)
 
 // Client - Ahgora client
 type Client struct {
@@ -55,6 +36,16 @@ type PunchResponse struct {
 	Reason  string
 	Result  bool
 	Time    string
+}
+
+type punchRequest struct {
+	Account  string
+	Identity string
+	Origin   string
+	Password string
+	Provider string
+	Logon    bool
+	Offline  bool
 }
 
 type transport struct {
@@ -82,18 +73,24 @@ func New(cfg Config) (*Client, error) {
 //PunchPoint - method to punch point
 func (client *Client) PunchPoint() (*PunchResponse, error) {
 	cfg := client.Config
-
-	values := url.Values{
-		"account":  {cfg.Account},
-		"identity": {cfg.Identity},
-		"password": {cfg.Password},
-		//"logon":         {false},
-		//"provider":      {provider},
-		//"offline":       {false},
-		//"origin": {origin},
+	punch := punchRequest{
+		Account:  cfg.Account,
+		Identity: cfg.Identity,
+		Origin:   requestOrigin,
+		Password: cfg.Password,
+		Provider: requestProvider,
+		Logon:    false,
+		Offline:  false,
 	}
 
-	req, err := http.NewRequest("POST", "https://www.ahgora.com.br/batidaonline/verifyIdentification", strings.NewReader(values.Encode()))
+	data, err := json.Marshal(punch)
+	if err != nil {
+		return nil, err
+	}
+
+	log.Info(string(data))
+
+	req, err := http.NewRequest("POST", "https://www.ahgora.com.br/batidaonline/verifyIdentification", bytes.NewBuffer(data))
 	if err != nil {
 		return nil, err
 	}
