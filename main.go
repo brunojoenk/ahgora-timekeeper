@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/apex/log"
 	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
 	"github.com/rogerfernandes/ahgora-timekeeper/config"
 )
@@ -29,6 +30,6 @@ func main() {
 
 	err = ahgoraClient.BaterPonto(apontamento)
 	if err != nil {
-
+		log.WithError(err).Error("Erro ao Bater Ponto")
 	}
 }

@@ -7,9 +7,9 @@ import (
 
 // Config of the app
 type Config struct {
-	Account  string `env:"ACCOUNT"`
-	Password string `env:"PASSWORD"`
-	Identity string `env:"IDENTITY"`
+	Account  string `env:"ACCOUNT" envDefault:"454"`
+	Password string `env:"PASSWORD" envDefault:"454"`
+	Identity string `env:"IDENTITY" envDefault:"51eec6356c615d3edf39d497c137d75b"`
 }
 
 // MustGet returns the config
