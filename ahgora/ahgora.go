@@ -39,13 +39,13 @@ type PunchResponse struct {
 }
 
 type punchRequest struct {
-	Account  string
-	Identity string
-	Origin   string
-	Password string
-	Provider string
-	Logon    bool
-	Offline  bool
+	Account  string `json:"account"`
+	Identity string `json:"identity"`
+	Origin   string `json:"origin"`
+	Password string `json:"password"`
+	Provider string `json:"provider"`
+	Logon    bool   `json:"logon"`
+	Offline  bool   `json:"offline"`
 }
 
 type transport struct {
