@@ -6,6 +6,8 @@ import (
 	"errors"
 	"net/http"
 	"time"
+
+	"github.com/apex/log"
 )
 
 const (
@@ -87,6 +89,9 @@ func (client *Client) PunchPoint() (*PunchResponse, error) {
 		return nil, err
 	}
 
+	log.Debug("AhgoraURL: " + cfg.AhgoraURL)
+	log.Debug("punchRequest: " + string(data))
+
 	req, err := http.NewRequest("POST", cfg.AhgoraURL+"/batidaonline/verifyIdentification", bytes.NewBuffer(data))
 	if err != nil {
 		return nil, err
@@ -102,6 +107,7 @@ func (client *Client) PunchPoint() (*PunchResponse, error) {
 		return nil, err
 	}
 
+	log.Debug("punchResponse: " + stringify(response))
 	return response, nil
 }
 
@@ -116,4 +122,13 @@ func doRequest(req *http.Request, client *Client) (*http.Response, error) {
 	}
 
 	return resp, nil
+}
+
+func stringify(r *PunchResponse) string {
+	out, err := json.Marshal(r)
+	if err != nil {
+		log.WithError(err).Error("Stringify PunchResponse ")
+		return ""
+	}
+	return string(out)
 }

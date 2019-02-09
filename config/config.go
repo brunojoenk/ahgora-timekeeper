@@ -11,6 +11,7 @@ type Config struct {
 	Password               string `env:"PASSWORD"`
 	Identity               string `env:"IDENTITY"`
 	AhgoraURL              string `env:"AHGORA_URL" envDefault:"https://www.ahgora.com.br"`
+	LogLevel               string `env:"LOG_LEVEL" envDefault:"INFO"`
 	AhgoraMockServerEnable bool   `env:"AHGORA_MOCK_SERVER_ENABLE" envDefault:"false"`
 }
 

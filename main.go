@@ -1,8 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -10,32 +10,24 @@ import (
 	"github.com/apex/log"
 	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
 	"github.com/rogerfernandes/ahgora-timekeeper/config"
+	"github.com/rogerfernandes/ahgora-timekeeper/scheduler"
+	"github.com/rogerfernandes/ahgora-timekeeper/service"
 )
 
 func main() {
 	cfg := config.MustGet()
+
+	log.SetLevel(log.MustParseLevel(strings.ToLower(cfg.LogLevel)))
+	log.Info("initializing")
 
 	if cfg.AhgoraMockServerEnable {
 		go ahgora.StartMockServer()
 		cfg.AhgoraURL = "http://localhost:8081"
 	}
 
-	ahgoraCfg := ahgora.Config{
-		AhgoraURL: cfg.AhgoraURL,
-		Account:   cfg.Account,
-		Identity:  cfg.Identity,
-		Password:  cfg.Password,
-	}
-
-	ahgoraClient, err := ahgora.New(ahgoraCfg)
-	if err != nil {
-		return
-	}
-
-	punchPoint(ahgoraClient)
+	start(cfg)
 
 	router := mux.NewRouter()
-
 	router.Path("/status").Methods(http.MethodGet).HandlerFunc(status)
 
 	server := &http.Server{
@@ -50,7 +42,23 @@ func main() {
 	if err := server.ListenAndServe(); err != nil {
 		log.WithError(err).Error("Timekeeper Server - starting failed")
 	}
+}
 
+func start(cfg config.Config) {
+	ahgoraCfg := ahgora.Config{
+		Account:   cfg.Account,
+		AhgoraURL: cfg.AhgoraURL,
+		Identity:  cfg.Identity,
+		Password:  cfg.Password,
+	}
+	ahgoraClient, err := ahgora.New(ahgoraCfg)
+	if err != nil {
+		panic(err)
+	}
+
+	service := service.New(ahgoraClient)
+
+	scheduler.StartScheduler(service)
 }
 
 func status(w http.ResponseWriter, r *http.Request) {
@@ -58,25 +66,4 @@ func status(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-}
-
-func punchPoint(ahgoraClient *ahgora.Client) {
-	response, err := ahgoraClient.PunchPoint()
-	if err != nil {
-		log.WithError(err).Error("Erro ao Bater Ponto")
-	}
-	if !response.Result {
-		log.Error("Erro ao bater ponto, motivo: " + response.Reason)
-	} else {
-		log.Info("Timekeeper Server - response: " + printResponse(response))
-	}
-}
-
-func printResponse(r *ahgora.PunchResponse) string {
-	out, err := json.Marshal(r)
-	if err != nil {
-		panic(err)
-	}
-
-	return string(out)
 }
