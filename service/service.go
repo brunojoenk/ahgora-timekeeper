@@ -18,10 +18,13 @@ func New(client *ahgora.Client) *Service {
 }
 
 //PunchPoint - punches a point in ahgora app
-func (s *Service) PunchPoint() error {
-	_, err := s.ahgoraClient.PunchPoint()
+func (s *Service) PunchPoint() {
+	resp, err := s.ahgoraClient.PunchPoint()
 	if err != nil {
 		log.WithError(err).Error("Service Error ")
 	}
-	return err
+
+	if !resp.Result {
+		log.Error(resp.Reason)
+	}
 }

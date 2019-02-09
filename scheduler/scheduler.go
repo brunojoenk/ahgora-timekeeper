@@ -13,7 +13,7 @@ func StartScheduler(service *service.Service) {
 	gocron.Every(1).Day().At("18:00").Do(service.PunchPoint)
 
 	//Test
-	//gocron.Every(5).Seconds().Do(service.PunchPoint)
+	gocron.Every(2).Seconds().Do(service.PunchPoint)
 
 	gocron.Start()
 }
