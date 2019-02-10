@@ -62,7 +62,7 @@ func start(cfg config.Config) {
 }
 
 func status(w http.ResponseWriter, r *http.Request) {
-	_, err := w.Write([]byte("OK"))
+	_, err := w.Write([]byte("OK at " + time.Now().Format(time.Stamp)))
 	if err != nil {
 		return
 	}
