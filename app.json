@@ -1,9 +1,9 @@
 {
     "name": "Ahgora Timekeeper",
-    "description": "Timekeeping service in Ahgora.",
+    "description": "Timekeeping service in Ahgora",
     "keywords": [
-      "go"
+        "go"
     ],
     "website": "http://github.com/rogerfernandes/ahgora-timekeeper",
     "repository": "http://github.com/rogerfernandes/ahgora-timekeeper"
-  }
+}

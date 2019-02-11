@@ -1,14 +1,21 @@
-FROM heroku/cedar:14
+FROM heroku/heroku:16-build as build
 
-COPY . /app/src/github.com/rogerfernandes/ahgora-timekeeper
-WORKDIR /app/src/github.com/rogerfernandes/ahgora-timekeeper
+COPY . /app
+WORKDIR /app
 
+# Setup buildpack
+RUN mkdir -p /tmp/buildpack/heroku/go /tmp/build_cache /tmp/env
+RUN curl https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/go.tgz | tar xz -C /tmp/buildpack/heroku/go
+
+#Execute Buildpack
+RUN STACK=heroku-16 /tmp/buildpack/heroku/go/bin/compile /app /tmp/build_cache /tmp/env
+
+# Prepare final, minimal image
+FROM heroku/heroku:16
+
+COPY --from=build /app /app
 ENV HOME /app
-ENV GOVERSION=1.11
-ENV GOROOT $HOME/.go/$GOVERSION/go
-ENV GOPATH $HOME
-ENV PATH $PATH:$HOME/bin:$GOROOT/bin:$GOPATH/bin
-
-RUN mkdir -p $HOME/.go/$GOVERSION
-RUN cd $HOME/.go/$GOVERSION; curl -s https://storage.googleapis.com/golang/go$GOVERSION.linux-amd64.tar.gz | tar zxf -
-RUN go install -v github.com/rogerfernandes/ahgora-timekeeper
+WORKDIR /app
+RUN useradd -m heroku
+USER heroku
+CMD /app/bin/ahgora-timekeeper
