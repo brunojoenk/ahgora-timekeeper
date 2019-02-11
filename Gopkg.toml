@@ -24,6 +24,7 @@
 #   go-tests = true
 #   unused-packages = true
 
+
 [[constraint]]
   name = "github.com/apex/log"
   version = "1.1.0"
@@ -32,6 +33,19 @@
   name = "github.com/caarlos0/env"
   version = "3.5.0"
 
+[[constraint]]
+  name = "github.com/gorilla/mux"
+  version = "1.7.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/jasonlvhit/gocron"
+
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+  root-package = "github.com/rogerfernandes/ahgora-timekeeper"
+  go-version = "1.11"
+  install = [ "./..." ]
