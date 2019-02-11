@@ -1,5 +1,4 @@
 FROM heroku/cedar:14
-MAINTAINER Heroku Build & Packaging Team <build-and-packaging@heroku.com>
 
 COPY . /app/src/github.com/rogerfernandes/ahgora-timekeeper
 WORKDIR /app/src/github.com/rogerfernandes/ahgora-timekeeper
