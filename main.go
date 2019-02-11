@@ -20,7 +20,7 @@ func main() {
 	log.SetLevel(log.MustParseLevel(strings.ToLower(cfg.LogLevel)))
 	log.Info("initializing")
 
-	if cfg.AhgoraMockServerEnable {
+	if cfg.AhgoraMockServerEnabled {
 		go ahgora.StartMockServer()
 		cfg.AhgoraURL = "http://localhost:8081"
 	}
