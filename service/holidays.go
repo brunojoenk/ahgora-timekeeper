@@ -3,6 +3,8 @@ package service
 import "time"
 
 const (
+	defaultFormat = "2006-01-02"
+
 	//CarnivalOptionalPoint - Ponto facultativo Carnaval
 	CarnivalOptionalPoint = "2019-03-04"
 
@@ -29,7 +31,7 @@ const (
 )
 
 func isHoliday(day time.Time) bool {
-	switch day.Format("2006-01-02") {
+	switch day.Format(defaultFormat) {
 	case CarnivalOptionalPoint, Carnival, GoodFriday, MayDay, CorpusChristi, ProclamationOfTheRepublic, ChristmasEve, Christmas:
 		return true
 	default:
