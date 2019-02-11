@@ -7,11 +7,6 @@ import (
 	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
 )
 
-const (
-	saturday = 6
-	sunday   = 7
-)
-
 //Service - application service
 type Service struct {
 	ahgoraClient *ahgora.Client
@@ -39,6 +34,9 @@ func (s *Service) PunchPoint() {
 }
 
 func shouldPunchPoint() bool {
-	weekday := time.Now().Weekday()
-	return weekday != saturday && weekday != sunday
+	now := time.Now()
+	if isWeekend(now) || isHoliday(now) {
+		return false
+	}
+	return true
 }
