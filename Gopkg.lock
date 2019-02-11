@@ -52,3 +52,8 @@
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
+
+[metadata.heroku]
+  root-package = "github.com/rogerfernandes/ahgora-timekeeper"
+  go-version = "1.11"
+  install = [ "./..." ]
