@@ -6,7 +6,7 @@ Serviço de apontamento de horas no [Ahgora](https://www.ahgora.com.br/).
 
 ## Deploying to Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/rogerfernandes/ahgora-timekeeper/tree/master)
 
 Configurar as variáveis de ambiente em Heroku settings
 ![image](https://user-images.githubusercontent.com/4138825/52572102-32477e00-2dfe-11e9-8b58-8c242200a30b.png)
