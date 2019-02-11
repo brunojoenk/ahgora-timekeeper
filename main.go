@@ -31,7 +31,7 @@ func main() {
 	router.Path("/status").Methods(http.MethodGet).HandlerFunc(status)
 
 	server := &http.Server{
-		Addr:         ":8080",
+		Addr:         ":" + cfg.Port,
 		Handler:      router,
 		ReadTimeout:  time.Second * 15,
 		WriteTimeout: time.Second * 15,

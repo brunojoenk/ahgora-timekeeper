@@ -7,6 +7,7 @@ import (
 
 // Config of the app
 type Config struct {
+	Port                    string `env:"PORT" envDefault:"8080"`
 	Account                 string `env:"ACCOUNT" envDefault:"123"`
 	Password                string `env:"PASSWORD" envDefault:"123"`
 	Identity                string `env:"IDENTITY" envDefault:"fd11vvosaxnf8gskg39j"`
