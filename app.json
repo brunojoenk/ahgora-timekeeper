@@ -5,5 +5,8 @@
         "go"
     ],
     "website": "http://github.com/rogerfernandes/ahgora-timekeeper",
-    "repository": "http://github.com/rogerfernandes/ahgora-timekeeper"
+    "repository": "http://github.com/rogerfernandes/ahgora-timekeeper",
+    "env": {
+        "TZ": "America/Sao_Paulo"
+    }
 }
