@@ -1,12 +1,10 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/rogerfernandes/ahgora-timekeeper/tree/master)
+
 # ahgora-timekeeper
 
 Serviço de apontamento de horas no [Ahgora](https://www.ahgora.com.br/).
 
 ---
-
-## Deploying to Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/rogerfernandes/ahgora-timekeeper/tree/master)
 
 ## Features
 - Apontamento automático de horas(horário comercial)
