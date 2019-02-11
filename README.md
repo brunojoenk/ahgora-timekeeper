@@ -8,10 +8,11 @@ Serviço de apontamento de horas no [Ahgora](https://www.ahgora.com.br/).
 
 ## Features
 - Apontamento automático de horas(horário comercial)
+- Validação para não apontar horas nos finais de semana e feriados(2019)
 
 ## Comming Soon
+- Listagem de horas apontadas pelo App
 - Customização de períodos para apontamento de horas automático
-- Configuração de exceções para não apontar horas em dias de folga e/ou feriados
 - Randomização de apontamento de hora dentro de períodos customizados. Ex: entre 8:00h e 8:15h, entre 11:10h e 12:05h e etc. 
 - Envio semanal de relatório de pontos batidos por email
 
