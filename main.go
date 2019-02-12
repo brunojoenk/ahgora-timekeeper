@@ -10,6 +10,7 @@ import (
 	"github.com/apex/log"
 	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
 	"github.com/rogerfernandes/ahgora-timekeeper/config"
+	"github.com/rogerfernandes/ahgora-timekeeper/heroku"
 	"github.com/rogerfernandes/ahgora-timekeeper/scheduler"
 	"github.com/rogerfernandes/ahgora-timekeeper/service"
 )
@@ -59,6 +60,8 @@ func start(cfg config.Config) {
 	service := service.New(ahgoraClient)
 
 	scheduler.StartScheduler(service)
+
+	heroku.CronHeroku()
 }
 
 func status(w http.ResponseWriter, r *http.Request) {
