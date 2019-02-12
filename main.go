@@ -52,6 +52,7 @@ func start(cfg config.Config) {
 		Identity:  cfg.Identity,
 		Password:  cfg.Password,
 	}
+
 	ahgoraClient, err := ahgora.New(ahgoraCfg)
 	if err != nil {
 		panic(err)
@@ -61,7 +62,7 @@ func start(cfg config.Config) {
 
 	scheduler.StartScheduler(service)
 
-	heroku.CronHeroku()
+	heroku.CronHeroku(cfg.HerokuAppURL)
 }
 
 func status(w http.ResponseWriter, r *http.Request) {

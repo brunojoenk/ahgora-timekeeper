@@ -6,13 +6,16 @@ import (
 	"github.com/jasonlvhit/gocron"
 )
 
+var herokuAppURL string
+
 //CronHeroku - calls HerokuApp
-func CronHeroku() {
+func CronHeroku(url string) {
+	herokuAppURL = url
 	hcron := gocron.NewScheduler()
 	hcron.Every(28).Minutes().Do(pingHerokuApp)
 	hcron.Start()
 }
 
 func pingHerokuApp() {
-	http.Get("ahgora-timekeeper.herokuapp.com/status")
+	http.Get(herokuAppURL)
 }
