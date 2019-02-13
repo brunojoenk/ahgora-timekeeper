@@ -14,16 +14,16 @@ var herokuAppURL string
 func CronHeroku(url string) {
 	herokuAppURL = url
 	hcron := gocron.NewScheduler()
-	hcron.Every(28).Minutes().Do(pingHerokuApp)
+	hcron.Every(28).Minutes().Do(callHerokuApp)
 	hcron.Start()
 }
 
-func pingHerokuApp() {
+func callHerokuApp() {
 	resp, err := http.Get(herokuAppURL)
 	if err != nil {
-		log.WithError(err).Error("WakeUp HerokuApp! Error")
+		log.WithError(err).Error("Stay awake HerokuApp! Error")
 	}
-	log.Debug("WakeUp HerokuApp! Response: " + getBodyContent(resp))
+	log.Debug("Stay awake HerokuApp! Response: " + getBodyContent(resp))
 }
 
 func getBodyContent(resp *http.Response) string {
