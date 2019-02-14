@@ -55,7 +55,7 @@ func start(cfg config.Config) {
 	ahgoraClient := ahgora.New(ahgoraCfg)
 	srvc := service.New(ahgoraClient)
 	schdlr := scheduler.New(srvc, cfg.CronTimes)
-	schdlr.StartScheduler()
+	schdlr.Start()
 
 	heroku.CronHeroku(cfg.HerokuAppURL)
 }

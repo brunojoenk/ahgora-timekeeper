@@ -22,8 +22,8 @@ func New(service *service.Service, cronTimes []string) *Scheduler {
 	}
 }
 
-//StartScheduler - Starts scheduling point punchers
-func (s *Scheduler) StartScheduler() {
+//Start - Starts scheduling
+func (s *Scheduler) Start() {
 	s.schedule()
 	s.Scheduler.Start()
 	s.rescheduler()
