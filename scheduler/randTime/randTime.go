@@ -17,7 +17,9 @@ func RandomizeTime(time string) string {
 		minute -= 60
 		hour++
 	}
-	return stringify(hour) + ":" + stringify(minute)
+	randHour := stringify(hour) + ":" + stringify(minute)
+	log.Debug("Randomized Time: " + randHour)
+	return randHour
 }
 
 func splitTime(time string) (int, int) {
