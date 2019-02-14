@@ -52,15 +52,10 @@ func start(cfg config.Config) {
 		Identity:  cfg.Identity,
 		Password:  cfg.Password,
 	}
-
-	ahgoraClient, err := ahgora.New(ahgoraCfg)
-	if err != nil {
-		panic(err)
-	}
-
-	service := service.New(ahgoraClient)
-
-	scheduler.StartScheduler(service)
+	ahgoraClient := ahgora.New(ahgoraCfg)
+	srvc := service.New(ahgoraClient)
+	schdlr := scheduler.New(srvc, cfg.CronTimes)
+	schdlr.StartScheduler()
 
 	heroku.CronHeroku(cfg.HerokuAppURL)
 }

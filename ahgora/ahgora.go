@@ -59,7 +59,7 @@ func (t *transport) RoundTrip(r *http.Request) (*http.Response, error) {
 }
 
 // New - new client
-func New(cfg Config) (*Client, error) {
+func New(cfg Config) *Client {
 	return &Client{
 		http.Client{
 			Timeout: time.Duration(30) * time.Second,
@@ -68,7 +68,7 @@ func New(cfg Config) (*Client, error) {
 			},
 		},
 		cfg,
-	}, nil
+	}
 }
 
 //PunchPoint - method to punch point
