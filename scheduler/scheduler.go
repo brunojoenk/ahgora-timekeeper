@@ -3,13 +3,44 @@ package scheduler
 import (
 	"github.com/jasonlvhit/gocron"
 	"github.com/rogerfernandes/ahgora-timekeeper/service"
+	"github.com/rogerfernandes/ahgora-timekeeper/util"
 )
 
+//Scheduler - Struct
+type Scheduler struct {
+	Scheduler *gocron.Scheduler
+	Service   *service.Service
+	CronTimes []string
+}
+
+//New - Creates a new Scheduler
+func New(service *service.Service, cronTimes []string) *Scheduler {
+	return &Scheduler{
+		Scheduler: gocron.NewScheduler(),
+		Service:   service,
+		CronTimes: cronTimes,
+	}
+}
+
 //StartScheduler - Starts scheduling point punchers
-func StartScheduler(service *service.Service) {
-	gocron.Every(1).Day().At("08:00").Do(service.PunchPoint)
-	gocron.Every(1).Day().At("11:53").Do(service.PunchPoint)
-	gocron.Every(1).Day().At("13:04").Do(service.PunchPoint)
-	gocron.Every(1).Day().At("18:23").Do(service.PunchPoint)
+func (s *Scheduler) StartScheduler() {
+	s.schedule()
+	s.Scheduler.Start()
+	s.rescheduler()
+}
+
+func (s *Scheduler) schedule() {
+	for i := range s.CronTimes {
+		s.Scheduler.Every(1).Day().At(util.RandomizeTime(s.CronTimes[i])).Do(s.Service.PunchPoint)
+	}
+}
+
+func (s *Scheduler) reschedule() {
+	s.Scheduler.Clear()
+	s.schedule()
+}
+
+func (s *Scheduler) rescheduler() {
+	gocron.Every(1).Day().At("00:00").Do(s.reschedule)
 	gocron.Start()
 }
