@@ -2,8 +2,8 @@ package scheduler
 
 import (
 	"github.com/jasonlvhit/gocron"
+	"github.com/rogerfernandes/ahgora-timekeeper/scheduler/randTime"
 	"github.com/rogerfernandes/ahgora-timekeeper/service"
-	"github.com/rogerfernandes/ahgora-timekeeper/util"
 )
 
 //Scheduler - Struct
@@ -31,7 +31,7 @@ func (s *Scheduler) StartScheduler() {
 
 func (s *Scheduler) schedule() {
 	for i := range s.CronTimes {
-		s.Scheduler.Every(1).Day().At(util.RandomizeTime(s.CronTimes[i])).Do(s.Service.PunchPoint)
+		s.Scheduler.Every(1).Day().At(randTime.RandomizeTime(s.CronTimes[i])).Do(s.Service.PunchPoint)
 	}
 }
 

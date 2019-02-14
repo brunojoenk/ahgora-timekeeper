@@ -1,4 +1,4 @@
-package util
+package randTime
 
 import (
 	"math/rand"
