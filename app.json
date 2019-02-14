@@ -8,7 +8,7 @@
     "repository": "http://github.com/rogerfernandes/ahgora-timekeeper",
     "env": {
         "ACCOUNT": "123",
-        "AHGORA_MOCK_SERVER_ENABLED": "true",
+        "AHGORA_MOCK_SERVER_ENABLED": "false",
         "AHGORA_URL": "https://www.ahgora.com.br",
         "IDENTITY": "fd11vvosaxnf8gskg39j",
         "LOG_LEVEL": "DEBUG",
@@ -16,6 +16,6 @@
         "PORT": "8080",
         "TZ": "America/Sao_Paulo",
         "CRON_TIMES": "08:00,11:50,13:20,17:50",
-        "HEROKU_APP_URL": "https://ahgoratk.herokuapp.com"
+        "HEROKU_APP_URL": "https://ahgoratk.herokuapp.com/status"
     }
 }
