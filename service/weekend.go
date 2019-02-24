@@ -4,7 +4,7 @@ import "time"
 
 const (
 	saturday = 6
-	sunday   = 7
+	sunday   = 0
 )
 
 func isWeekend(now time.Time) bool {
