@@ -4,8 +4,8 @@
     "keywords": [
         "go"
     ],
-    "website": "http://github.com/rogerfernandes/ahgora-timekeeper",
-    "repository": "http://github.com/rogerfernandes/ahgora-timekeeper",
+    "website": "http://github.com/brunojoenk/ahgora-timekeeper",
+    "repository": "http://github.com/brunojoenk/ahgora-timekeeper",
     "env": {
         "ACCOUNT": "123",
         "AHGORA_MOCK_SERVER_ENABLED": "false",

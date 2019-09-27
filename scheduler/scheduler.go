@@ -1,9 +1,9 @@
 package scheduler
 
 import (
+	"github.com/brunojoenk/ahgora-timekeeper/scheduler/randTime"
+	"github.com/brunojoenk/ahgora-timekeeper/service"
 	"github.com/jasonlvhit/gocron"
-	"github.com/rogerfernandes/ahgora-timekeeper/scheduler/randTime"
-	"github.com/rogerfernandes/ahgora-timekeeper/service"
 )
 
 //Scheduler - Struct

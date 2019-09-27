@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/apex/log"
-	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
+	"github.com/brunojoenk/ahgora-timekeeper/ahgora"
 )
 
 //Service - application service

@@ -8,11 +8,11 @@ import (
 	"github.com/gorilla/mux"
 
 	"github.com/apex/log"
-	"github.com/rogerfernandes/ahgora-timekeeper/ahgora"
-	"github.com/rogerfernandes/ahgora-timekeeper/config"
-	"github.com/rogerfernandes/ahgora-timekeeper/heroku"
-	"github.com/rogerfernandes/ahgora-timekeeper/scheduler"
-	"github.com/rogerfernandes/ahgora-timekeeper/service"
+	"github.com/brunojoenk/ahgora-timekeeper/ahgora"
+	"github.com/brunojoenk/ahgora-timekeeper/config"
+	"github.com/brunojoenk/ahgora-timekeeper/heroku"
+	"github.com/brunojoenk/ahgora-timekeeper/scheduler"
+	"github.com/brunojoenk/ahgora-timekeeper/service"
 )
 
 func main() {

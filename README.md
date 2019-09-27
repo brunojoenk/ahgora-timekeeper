@@ -1,4 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/rogerfernandes/ahgora-timekeeper/tree/master)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/brunojoenk/ahgora-timekeeper/tree/master)
 
 # ahgora-timekeeper
 
@@ -15,12 +15,3 @@ Serviço de apontamento de horas no [Ahgora](https://www.ahgora.com.br/).
 ## Comming Soon
 - Listagem de horas apontadas pelo App
 - Envio semanal de relatório de pontos batidos por email
-
-## Collaborators
-| [@rogerfernandes][rogerfernandes] |
-| :-------------------------------: |
-|       ![][p_rogerfernandes]       |
-|         Software Engineer         |
-
-[rogerfernandes]: http://github.com/rogerfernandes
-[p_rogerfernandes]: https://avatars0.githubusercontent.com/u/4138825?v=4&s=100
