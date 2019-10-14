@@ -10,7 +10,6 @@ import (
 	"github.com/apex/log"
 	"github.com/brunojoenk/ahgora-timekeeper/ahgora"
 	"github.com/brunojoenk/ahgora-timekeeper/config"
-	"github.com/brunojoenk/ahgora-timekeeper/heroku"
 	"github.com/brunojoenk/ahgora-timekeeper/scheduler"
 	"github.com/brunojoenk/ahgora-timekeeper/service"
 )
@@ -57,7 +56,7 @@ func start(cfg config.Config) {
 	schdlr := scheduler.New(srvc, cfg.CronTimes)
 	schdlr.Start()
 
-	heroku.CronHeroku(cfg.HerokuAppURL)
+	//heroku.CronHeroku(cfg.HerokuAppURL)
 }
 
 func status(w http.ResponseWriter, r *http.Request) {
