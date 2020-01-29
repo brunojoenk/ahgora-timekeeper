@@ -40,7 +40,7 @@ func status(w http.ResponseWriter, r *http.Request) {
 func punch(w http.ResponseWriter, r *http.Request) {
 	log.Debug("Ahgora Mock Server - Punching point!")
 	resp := &PunchResponse{
-		Day:     "2019-01-02",
+		Day:     "2020-01-02",
 		Name:    "CRONOS",
 		Punches: []string{"0800", "1200", "1330"},
 		Reason:  "",

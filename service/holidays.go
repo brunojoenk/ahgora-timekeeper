@@ -6,42 +6,42 @@ const (
 	defaultFormat = "2006-01-02"
 
 	//CarnivalOptionalPoint - Ponto facultativo Carnaval
-	CarnivalOptionalPoint = "2019-03-04"
+	//CarnivalOptionalPoint = "2020-03-04"
 
 	//Carnival - Carnaval
-	Carnival = "2019-03-05"
+	Carnival = "2020-02-25"
 
 	//GoodFriday - Sexta-feira Santa
-	GoodFriday = "2019-04-19"
+	GoodFriday = "2020-04-19"
 
 	//MayDay - Dia do Trabalho
-	MayDay = "2019-05-01"
+	MayDay = "2020-05-01"
 
 	//CorpusChristi - Corpus Christi
-	CorpusChristi = "2019-06-20"
+	CorpusChristi = "2020-06-20"
 
 	//ProclamationOfTheRepublic - Proclamação Da República
-	ProclamationOfTheRepublic = "2019-11-15"
+	ProclamationOfTheRepublic = "2020-11-15"
 
 	//Festa de encerramento
-	CompanyParty = "2019-12-13"
+	//CompanyParty = "2020-12-13"
 
 	//ChristmasEve - Véspera de Natal
-	ChristmasEve = "2019-12-24"
+	ChristmasEve = "2020-12-24"
 
 	//Christmas - Natal
-	Christmas = "2019-12-25"
+	Christmas = "2020-12-25"
 
-	//End's year
-	EndsYear = "2019-12-31"
+	//End's year - Fim de ano
+	EndsYear = "2020-12-31"
 
-	//New's year
-	NewsYear = "2020-01-01"
+	//New's year - Inicio de ano
+	NewsYear = "2021-01-01"
 )
 
 func isHoliday(day time.Time) bool {
 	switch day.Format(defaultFormat) {
-	case CarnivalOptionalPoint, Carnival, GoodFriday, MayDay, CorpusChristi, ProclamationOfTheRepublic, CompanyParty, ChristmasEve, Christmas, EndsYear, NewsYear:
+	case Carnival, GoodFriday, MayDay, CorpusChristi, ProclamationOfTheRepublic, ChristmasEve, Christmas, EndsYear, NewsYear:
 		return true
 	default:
 		return false
