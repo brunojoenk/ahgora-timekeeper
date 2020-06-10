@@ -20,9 +20,6 @@ const (
 	//MayDay - Dia do Trabalho
 	MayDay = "2020-05-01"
 
-	//CorpusChristi - Corpus Christi
-	CorpusChristi = "2020-06-20"
-
 	//ProclamationOfTheRepublic - Proclamação Da República
 	ProclamationOfTheRepublic = "2020-11-15"
 
@@ -44,7 +41,7 @@ const (
 
 func isHoliday(day time.Time) bool {
 	switch day.Format(defaultFormat) {
-	case Carnival, GoodFriday, Tiradentes, MayDay, CorpusChristi, ProclamationOfTheRepublic, ChristmasEve, Christmas, EndsYear, NewsYear:
+	case Carnival, GoodFriday, Tiradentes, MayDay, ProclamationOfTheRepublic, ChristmasEve, Christmas, EndsYear, NewsYear:
 		return true
 	default:
 		return false
