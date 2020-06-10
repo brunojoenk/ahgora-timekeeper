@@ -20,6 +20,9 @@ const (
 	//MayDay - Dia do Trabalho
 	MayDay = "2020-05-01"
 
+	//CorpusChristi - Corpus Christi
+	//CorpusChristi = "2020-06-20"
+
 	//ProclamationOfTheRepublic - Proclamação Da República
 	ProclamationOfTheRepublic = "2020-11-15"
 
